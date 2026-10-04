@@ -6,310 +6,1115 @@
     <title>NYC College Tour & Trip Dashboard | Oct 10–14, 2026</title>
     <style>
         :root {
-            --primary: #1e293b;
-            --accent: #2563eb;
-            --accent-light: #eff6ff;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --radius: 12px;
+            color-scheme: light;
+            --ink: #24332f;
+            --ink-soft: #445650;
+            --muted: #687771;
+            --paper: #f5f4ef;
+            --surface: #fffefa;
+            --line: #e3e4dc;
+            --accent: #a45036;
+            --accent-dark: #873e2b;
+            --accent-pale: #f5e9e3;
+            --sage: #e7eee7;
+            --shadow: 0 12px 30px rgba(36, 51, 47, 0.06);
+            --radius: 14px;
         }
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            padding-bottom: 80px;
-            max-width: 600px;
-            margin: 0 auto;
+            margin: 0;
+            padding-bottom: 72px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: white;
-            padding: 24px 20px;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: var(--shadow);
+        button, a {
+            font: inherit;
+        }
+
+        button:focus-visible, a:focus-visible {
+            outline: 3px solid #bb765d;
+            outline-offset: 3px;
+        }
+
+        .site-header {
+            background: var(--ink);
+            color: #fffefa;
+        }
+
+        .site-header-inner {
+            width: min(100% - 40px, 1040px);
+            margin: 0 auto;
+            padding: 42px 0 34px;
+        }
+
+        .eyebrow, .section-kicker {
+            color: #c6d0c9;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
         }
 
         header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 4px;
+            margin: 8px 0 5px;
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 500;
+            letter-spacing: -0.035em;
+            line-height: 1.08;
         }
 
         header p {
-            color: #94a3b8;
-            font-size: 0.9rem;
+            margin: 0;
+            color: #d3dad5;
+            font-size: 1rem;
         }
 
         .quick-info {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 16px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            max-width: 620px;
+            margin-top: 26px;
         }
 
         .info-pill {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 10px 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
+            padding: 13px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fffefa;
+            font-size: 0.95rem;
         }
 
         .info-pill span {
             display: block;
-            color: #94a3b8;
+            margin-bottom: 2px;
+            color: #c6d0c9;
             font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         nav {
+            position: sticky;
+            z-index: 5;
+            top: 0;
             display: flex;
-            background: var(--card-bg);
-            margin: 16px 16px 0;
-            border-radius: var(--radius);
-            padding: 4px;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            gap: 4px;
+            width: min(100% - 40px, 1040px);
+            margin: 22px auto 0;
+            padding: 5px;
             overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: rgba(255, 254, 250, 0.96);
+            box-shadow: 0 5px 18px rgba(36, 51, 47, 0.07);
+            scrollbar-width: thin;
         }
 
         nav button {
-            flex: 1;
-            padding: 10px 8px;
-            border: none;
-            background: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
+            flex: 1 0 auto;
+            min-height: 44px;
+            padding: 9px 16px;
+            border: 0;
             border-radius: 8px;
+            background: transparent;
+            color: var(--muted);
             cursor: pointer;
-            transition: all 0.2s;
+            font-size: 0.9rem;
+            font-weight: 650;
+            transition: background-color 160ms ease, color 160ms ease;
             white-space: nowrap;
         }
 
+        nav button:hover:not(.active) {
+            background: var(--paper);
+            color: var(--ink);
+        }
+
         nav button.active {
-            background: var(--accent);
-            color: white;
-        }
-
-        .day-filter {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 16px;
-            scrollbar-width: none;
-        }
-
-        .day-filter::-webkit-scrollbar {
-            display: none;
-        }
-
-        .day-btn {
-            flex: 0 0 auto;
-            padding: 8px 16px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--card-bg);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-        }
-
-        .day-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+            background: var(--ink);
+            color: #fffefa;
         }
 
         .tab-content {
             display: none;
-            padding: 0 16px;
+            width: min(100% - 40px, 1040px);
+            margin: 0 auto;
+            padding-top: 18px;
         }
 
         .tab-content.active {
             display: block;
         }
 
+        .day-filter {
+            display: flex;
+            gap: 8px;
+            margin: 4px 0 26px;
+            padding: 0 0 3px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .day-btn {
+            flex: 0 0 auto;
+            min-height: 42px;
+            padding: 8px 16px;
+            border: 1px solid #d9ddd5;
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--ink-soft);
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 650;
+            transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+        }
+
+        .day-btn:hover:not(.active) {
+            border-color: var(--ink-soft);
+            background: #f0f0e9;
+        }
+
+        .day-btn.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        .day-group[hidden] {
+            display: none;
+        }
+
+        .day-group {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            margin-bottom: 36px;
+        }
+
+        .day-heading {
+            display: flex;
+            align-items: baseline;
+            gap: 11px;
+            margin: 0 0 12px 2px;
+            padding: 5px 0 0 15px;
+            border-left: 2px solid var(--accent);
+        }
+
+        .day-heading h2 {
+            margin: 0;
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.55rem;
+            font-weight: 500;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        .day-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .day-activities {
+            min-width: 0;
+        }
+
         .card {
-            background: var(--card-bg);
+            margin: 0 0 13px;
+            padding: 20px 22px;
+            border: 1px solid var(--line);
             border-radius: var(--radius);
-            padding: 16px;
-            margin-bottom: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background: var(--surface);
+            box-shadow: 0 2px 7px rgba(36, 51, 47, 0.035);
+            transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+        }
+
+        .card:hover {
+            transform: translateY(-1px);
+            border-color: #d5d6cc;
+            box-shadow: var(--shadow);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
         }
 
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 25px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 750;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .tag-college { background: #e6edf1; color: #345868; }
+        .tag-show { background: #f3e7e8; color: #78414a; }
+        .tag-food { background: #f5eadf; color: #81502f; }
+        .tag-transit { background: #eceeea; color: #4f5d55; }
+        .tag-hotel { background: var(--sage); color: #3f6048; }
+
         .time-badge {
-            background: var(--accent-light);
-            color: var(--accent);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 700;
+            flex: 0 0 auto;
+            color: var(--accent-dark);
+            font-size: 0.86rem;
+            font-weight: 750;
+            font-variant-numeric: tabular-nums;
+            text-align: right;
         }
 
         .card-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 4px;
+            margin-bottom: 5px;
+            color: var(--ink);
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.28rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
         }
 
         .card-location {
-            font-size: 0.85rem;
-            color: var(--text-muted);
             display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-bottom: 8px;
+            align-items: flex-start;
+            gap: 5px;
+            margin: 0 0 8px;
+            color: var(--muted);
+            font-size: 0.9rem;
         }
 
         .card-details {
-            font-size: 0.85rem;
-            color: #475569;
-            line-height: 1.4;
-            background: #f1f5f9;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 8px;
+            margin-top: 12px;
+            padding: 12px 14px;
+            border: 1px solid #ebece5;
+            border-radius: 9px;
+            background: #f7f7f2;
+            color: var(--ink-soft);
+            font-size: 0.91rem;
+            line-height: 1.6;
         }
 
         .map-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: #2563eb;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            justify-content: center;
+            gap: 7px;
+            min-height: 40px;
+            margin-top: 12px;
+            padding: 8px 13px;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            line-height: 1.35;
             text-decoration: none;
-            margin-top: 8px;
-            transition: background 0.2s;
+            transition: background-color 160ms ease, border-color 160ms ease;
         }
 
         .map-btn:hover {
-            background: #1d4ed8;
+            border-color: var(--accent-dark);
+            background: var(--accent-dark);
         }
-
-        .tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-right: 4px;
-        }
-
-        .tag-college { background: #e0f2fe; color: #0369a1; }
-        .tag-show { background: #fce7f3; color: #be185d; }
-        .tag-food { background: #fef3c7; color: #b45309; }
-        .tag-transit { background: #f1f5f9; color: #475569; }
-        .tag-hotel { background: #dcfce7; color: #15803d; }
 
         .vault-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line);
         }
 
         .vault-item:last-child {
-            border-bottom: none;
+            border-bottom: 0;
         }
 
         .vault-label {
-            font-weight: 600;
-            font-size: 0.9rem;
+            color: var(--ink);
+            font-size: 0.98rem;
+            font-weight: 700;
         }
 
         .vault-sub {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 0.88rem;
         }
 
         .vault-code {
-            font-family: monospace;
-            background: #e2e8f0;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-weight: 700;
+            flex: 0 0 auto;
+            padding: 6px 10px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
             font-size: 0.85rem;
+            font-weight: 700;
         }
 
         .subway-route {
-            border-left: 3px solid var(--accent);
-            padding-left: 10px;
-            margin: 10px 0;
+            margin: 19px 0;
+            padding: 3px 0 3px 16px;
+            border-left: 2px solid #9b745f;
         }
 
         .subway-route strong {
-            color: var(--primary);
+            color: var(--ink);
+            font-size: 1rem;
+        }
+
+        .subway-route p {
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        #spots .card-details {
+            padding: 4px 0 0;
+            border: 0;
+            background: transparent;
+        }
+
+        #spots .card-details strong {
+            color: var(--ink);
+        }
+
+        #spots .card-details small {
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding-bottom: 40px;
+            }
+
+            .site-header-inner {
+                width: min(100% - 32px, 1040px);
+                padding: 30px 0 26px;
+            }
+
+            .quick-info {
+                gap: 8px;
+                margin-top: 21px;
+            }
+
+            .info-pill {
+                padding: 11px 12px;
+                font-size: 0.86rem;
+            }
+
+            nav {
+                top: 0;
+                width: calc(100% - 24px);
+                margin-top: 12px;
+            }
+
+            nav button {
+                min-height: 42px;
+                padding-inline: 13px;
+                font-size: 0.84rem;
+            }
+
+            .tab-content {
+                width: calc(100% - 28px);
+                padding-top: 15px;
+            }
+
+            .day-filter {
+                margin-bottom: 22px;
+            }
+
+            .day-group {
+                display: block;
+                margin-bottom: 28px;
+            }
+
+            .day-heading {
+                position: static;
+                margin: 0 0 12px 2px;
+                padding: 2px 0 2px 12px;
+            }
+
+            .day-heading h2 {
+                font-size: 1.4rem;
+            }
+
+            .card {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .quick-info {
+                grid-template-columns: 1fr;
+            }
+
+            .card-header {
+                align-items: flex-start;
+            }
+
+            .time-badge {
+                max-width: 46%;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Editorial travel system */
+        :root {
+            --ink: #171715;
+            --ink-soft: #383833;
+            --muted: #68675f;
+            --paper: #f4f1eb;
+            --surface: #fffdf9;
+            --line: #d8d4cc;
+            --accent: #c83224;
+            --accent-dark: #a8251b;
+            --accent-pale: #f7e7e2;
+            --sage: #e7eee7;
+            --shadow: 0 12px 28px rgba(23, 23, 21, 0.08);
+            --radius: 0;
+        }
+
+        body {
+            padding-bottom: 64px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        button, a {
+            font-family: inherit;
+        }
+
+        button:focus-visible, a:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .site-header {
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        .site-header-inner {
+            width: min(100% - 64px, 1120px);
+            padding: 58px 0 34px;
+        }
+
+        .eyebrow, .section-kicker {
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+        }
+
+        header h1 {
+            max-width: 850px;
+            margin: 15px 0 11px;
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 500;
+            letter-spacing: -0.055em;
+            line-height: 0.99;
+        }
+
+        header p {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .quick-info {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0;
+            max-width: 880px;
+            margin-top: 32px;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .info-pill {
+            min-width: 0;
+            padding: 15px 20px 15px 0;
+            border: 0;
+            border-radius: 0;
+            color: var(--ink);
+            font-size: 0.93rem;
+        }
+
+        .info-pill + .info-pill {
+            padding-left: 20px;
+            border-left: 1px solid var(--line);
+        }
+
+        .info-pill span {
+            margin-bottom: 5px;
+            color: var(--muted);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+        }
+
+        nav {
+            width: min(100% - 64px, 1120px);
+            margin-top: 0;
+            padding: 0;
+            gap: 28px;
+            overflow-x: auto;
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            border-radius: 0;
+            background: var(--paper);
+            box-shadow: none;
+        }
+
+        nav button {
+            position: relative;
+            min-height: 58px;
+            padding: 13px 2px;
+            border-radius: 0;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        nav button:hover:not(.active) {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        nav button.active {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        nav button.active::after {
+            position: absolute;
+            right: 0;
+            bottom: -1px;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            content: "";
+        }
+
+        .tab-content {
+            width: min(100% - 64px, 1120px);
+            padding-top: 30px;
+        }
+
+        .day-filter {
+            gap: 0;
+            margin: 0 0 40px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .day-btn {
+            min-height: 45px;
+            padding: 8px 17px;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .day-btn:hover:not(.active) {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .day-btn.active {
+            position: relative;
+            border: 0;
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .day-btn.active::after {
+            position: absolute;
+            right: 12px;
+            bottom: -1px;
+            left: 12px;
+            height: 3px;
+            background: var(--accent);
+            content: "";
+        }
+
+        .day-group {
+            margin-bottom: 53px;
+        }
+
+        .day-heading {
+            align-items: baseline;
+            gap: 14px;
+            margin: 0 0 8px;
+            padding: 0 0 14px;
+            border-left: 0;
+            border-bottom: 1px solid var(--ink);
+        }
+
+        .day-heading h2 {
+            font-size: clamp(1.9rem, 3.5vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: -0.045em;
+        }
+
+        .day-heading p {
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 650;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .card {
+            display: block;
+            margin: 0;
+            padding: 25px 10px 25px 0;
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            transition: background-color 160ms ease;
+        }
+
+        #itinerary .card {
+            display: grid;
+            grid-template-columns: minmax(120px, 0.24fr) minmax(0, 1fr);
+            grid-template-rows: auto auto auto auto;
+            grid-template-areas:
+                "meta title"
+                "meta location"
+                "meta details"
+                "meta action";
+            column-gap: 30px;
+        }
+
+        #itinerary .card-header { grid-area: meta; }
+        #itinerary .card-title { grid-area: title; }
+        #itinerary .card-location { grid-area: location; }
+        #itinerary .card-details { grid-area: details; }
+        #itinerary .map-btn { grid-area: action; }
+
+        .card:hover {
+            transform: none;
+            border-color: var(--line);
+            background: rgba(255, 253, 249, 0.62);
+            box-shadow: none;
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            justify-content: flex-end;
+            gap: 7px;
+            margin: 3px 0 0;
+        }
+
+        .tag {
+            min-height: 0;
+            padding: 0;
+            border-radius: 0;
+            background: transparent !important;
+            color: var(--muted) !important;
+            font-size: 0.66rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+        }
+
+        .time-badge {
+            color: var(--accent);
+            font-size: 1.08rem;
+            font-weight: 800;
+            line-height: 1.25;
+            text-align: left;
+        }
+
+        .card-title {
+            margin: 0;
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.22;
+        }
+
+        .card-location {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 0.91rem;
+        }
+
+        .card-details {
+            margin-top: 12px;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            color: var(--ink-soft);
+            font-size: 0.93rem;
+            line-height: 1.65;
+        }
+
+        .map-btn {
+            justify-self: start;
+            min-height: 42px;
+            margin-top: 15px;
+            padding: 9px 15px;
+            border: 1px solid var(--accent);
+            border-radius: 2px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.84rem;
+            font-weight: 750;
+        }
+
+        .map-btn:hover {
+            border-color: var(--accent-dark);
+            background: var(--accent-dark);
+        }
+
+        #maps > .card,
+        #vault > .card,
+        #spots > .card {
+            padding: 28px 32px;
+            border-top: 3px solid var(--ink);
+            border-bottom: 1px solid var(--line);
+            background: var(--surface);
+        }
+
+        #maps .card-title,
+        #vault .card-title,
+        #spots .card-title {
+            margin-bottom: 20px !important;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            line-height: 1.12;
+        }
+
+        #maps > .card > p {
+            max-width: 690px;
+            color: var(--muted) !important;
+            font-size: 0.98rem !important;
+        }
+
+        .subway-route {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 6px 22px;
+            margin: 0;
+            padding: 19px 0;
+            border-top: 1px solid var(--line);
+            border-left: 0;
+        }
+
+        .subway-route strong {
+            grid-column: 1;
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.17rem;
+            font-weight: 600;
+        }
+
+        .subway-route p {
+            grid-column: 1;
+            margin: 0 !important;
+            font-size: 0.9rem !important;
+        }
+
+        .subway-route .map-btn {
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            margin-top: 0;
+        }
+
+        .vault-item {
+            min-height: 78px;
+            padding: 17px 0;
+            border-bottom-color: var(--line);
+        }
+
+        .vault-label {
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.12rem;
+            font-weight: 600;
+        }
+
+        .vault-sub {
+            font-size: 0.9rem;
+        }
+
+        .vault-code {
+            padding: 7px 10px;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            background: transparent;
+            font-size: 0.84rem;
+        }
+
+        #spots .card-details {
+            margin-top: 0 !important;
+            padding: 0;
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+
+        #spots .card-details strong {
+            display: inline-block;
+            margin-top: 23px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            color: var(--ink);
+            font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.2rem;
+        }
+
+        #spots .card-details strong:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        #spots .card-details small {
+            display: block;
+            margin-top: 23px;
+            padding-top: 13px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        #spots .map-btn {
+            margin-top: 9px;
+        }
+
+        @media (max-width: 680px) {
+            .site-header-inner {
+                width: calc(100% - 36px);
+                padding: 38px 0 26px;
+            }
+
+            header h1 {
+                font-size: clamp(2.55rem, 12vw, 3.65rem);
+            }
+
+            .quick-info {
+                grid-template-columns: 1fr;
+                margin-top: 24px;
+            }
+
+            .info-pill,
+            .info-pill + .info-pill {
+                padding: 12px 0;
+                border-left: 0;
+            }
+
+            .info-pill + .info-pill {
+                border-top: 1px solid var(--line);
+            }
+
+            nav {
+                width: calc(100% - 36px);
+                gap: 0;
+                overflow-x: hidden;
+            }
+
+            nav button {
+                flex: 1 1 0;
+                min-width: 0;
+                min-height: 53px;
+                padding: 10px 3px;
+                font-size: 0.75rem;
+                text-align: center;
+                white-space: normal;
+            }
+
+            .tab-content {
+                width: calc(100% - 36px);
+                padding-top: 24px;
+            }
+
+            .day-filter {
+                margin-bottom: 30px;
+            }
+
+            .day-btn {
+                padding-inline: 13px;
+            }
+
+            .day-group {
+                margin-bottom: 38px;
+            }
+
+            .day-heading {
+                margin-bottom: 4px;
+                padding-bottom: 11px;
+            }
+
+            .card {
+                grid-template-columns: 86px minmax(0, 1fr);
+                column-gap: 16px;
+                padding: 20px 0;
+            }
+
+            .card-header {
+                gap: 6px;
+            }
+
+            .time-badge {
+                font-size: 0.97rem;
+            }
+
+            .tag {
+                font-size: 0.58rem;
+                letter-spacing: 0.09em;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            .card-location,
+            .card-details {
+                font-size: 0.88rem;
+            }
+
+            #maps > .card,
+            #vault > .card,
+            #spots > .card {
+                padding: 22px 19px;
+            }
+
+            .subway-route {
+                grid-template-columns: 1fr;
+                gap: 5px;
+                padding: 17px 0;
+            }
+
+            .subway-route strong,
+            .subway-route p,
+            .subway-route .map-btn {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            .subway-route .map-btn {
+                margin-top: 8px;
+            }
+
+            .vault-item {
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .site-header-inner,
+            nav,
+            .tab-content {
+                width: calc(100% - 28px);
+            }
+
+            .card {
+                grid-template-columns: 70px minmax(0, 1fr);
+                column-gap: 12px;
+            }
+
+            .time-badge {
+                font-size: 0.9rem;
+            }
+
+            .card-title {
+                font-size: 1.18rem;
+            }
+
+            .vault-item {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>NYC Trip & College Tour 🗽</h1>
-        <p>Oct 10 – Oct 14, 2026 • 3 Travelers</p>
-        <div class="quick-info">
-            <div class="info-pill">
-                <span>Hotel</span>
-                Four Points SoHo
-            </div>
-            <div class="info-pill">
-                <span>Show</span>
-                The Lost Boys (Sun 7:30)
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="eyebrow">A New York getaway</div>
+            <h1>NYC Trip & College Tour</h1>
+            <p>Oct 10 – Oct 14, 2026 • Christine, Joey &amp; Vesper</p>
+            <div class="quick-info">
+                <div class="info-pill">
+                    <span>Arrival · Sat Oct 10</span>
+                    American Airlines AA 4591 · LGA 2:17 PM
+                </div>
+                <div class="info-pill">
+                    <span>Hotel</span>
+                    Four Points SoHo
+                </div>
+                <div class="info-pill">
+                    <span>Return · Wed Oct 14</span>
+                    American Airlines AA 4554 · LGA 6:31 PM
+                </div>
             </div>
         </div>
     </header>
 
-    <nav>
-        <button class="active" onclick="switchTab('itinerary')">Itinerary</button>
-        <button onclick="switchTab('maps')">Subway Maps</button>
-        <button onclick="switchTab('vault')">Reservations</button>
-        <button onclick="switchTab('spots')">SoHo Spots</button>
+    <nav role="tablist" aria-label="Trip planning sections" onkeydown="handleTabKey(event)">
+        <button id="tab-itinerary" class="active" role="tab" aria-selected="true" aria-controls="itinerary" tabindex="0" onclick="switchTab('itinerary', this)">Itinerary</button>
+        <button id="tab-maps" role="tab" aria-selected="false" aria-controls="maps" tabindex="-1" onclick="switchTab('maps', this)">Subway Maps</button>
+        <button id="tab-vault" role="tab" aria-selected="false" aria-controls="vault" tabindex="-1" onclick="switchTab('vault', this)">Reservations</button>
+        <button id="tab-spots" role="tab" aria-selected="false" aria-controls="spots" tabindex="-1" onclick="switchTab('spots', this)">SoHo Spots</button>
     </nav>
 
     <!-- ITINERARY TAB -->
-    <div id="itinerary" class="tab-content active">
-        <div class="day-filter">
-            <button class="day-btn active" onclick="filterDay('all')">All Days</button>
-            <button class="day-btn" onclick="filterDay('sat')">Sat 10</button>
-            <button class="day-btn" onclick="filterDay('sun')">Sun 11</button>
-            <button class="day-btn" onclick="filterDay('mon')">Mon 12</button>
-            <button class="day-btn" onclick="filterDay('tue')">Tue 13</button>
-            <button class="day-btn" onclick="filterDay('wed')">Wed 14</button>
+    <div id="itinerary" class="tab-content active" role="tabpanel" aria-labelledby="tab-itinerary" aria-hidden="false">
+        <div class="day-filter" role="group" aria-label="Filter itinerary by day">
+            <button class="day-btn active" aria-pressed="true" onclick="filterDay('all', this)">All Days</button>
+            <button class="day-btn" aria-pressed="false" onclick="filterDay('sat', this)">Sat 10</button>
+            <button class="day-btn" aria-pressed="false" onclick="filterDay('sun', this)">Sun 11</button>
+            <button class="day-btn" aria-pressed="false" onclick="filterDay('mon', this)">Mon 12</button>
+            <button class="day-btn" aria-pressed="false" onclick="filterDay('tue', this)">Tue 13</button>
+            <button class="day-btn" aria-pressed="false" onclick="filterDay('wed', this)">Wed 14</button>
         </div>
 
         <!-- SAT OCT 10 -->
-        <div class="day-group day-sat">
+        <section class="day-group day-sat" aria-labelledby="day-sat">
+            <div class="day-heading">
+                <h2 id="day-sat">Saturday</h2>
+                <p>October 10</p>
+            </div>
+            <div class="day-activities">
             <div class="card">
                 <div class="card-header">
                     <span class="tag tag-hotel">Flight & Arrival</span>
@@ -334,10 +1139,16 @@
                 </div>
                 <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Four+Points+by+Sheraton+Manhattan+SoHo+Village+66+Charlton+St" target="_blank">📍 Open Hotel in Google Maps</a>
             </div>
-        </div>
+            </div>
+        </section>
 
         <!-- SUN OCT 11 -->
-        <div class="day-group day-sun">
+        <section class="day-group day-sun" aria-labelledby="day-sun">
+            <div class="day-heading">
+                <h2 id="day-sun">Sunday</h2>
+                <p>October 11</p>
+            </div>
+            <div class="day-activities">
             <div class="card">
                 <div class="card-header">
                     <span class="tag tag-food">Shopping</span>
@@ -358,7 +1169,7 @@
                 <div class="card-title">The Metropolitan Museum of Art</div>
                 <div class="card-location">📍 1000 5th Ave</div>
                 <div class="card-details">
-                    Explore galleries. Closes at 5:00 PM on Sundays. Head down to Midtown for dinner afterward.
+                    Hours: Sun–Tue & Thu 10:00 AM–5:00 PM; Fri–Sat 10:00 AM–9:00 PM; closed Wednesday. Your Sunday visit ends before the 5:00 PM close. Head down to Midtown for dinner afterward.
                 </div>
                 <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Coach+5th+Avenue+New+York&destination=The+Metropolitan+Museum+of+Art&travelmode=transit" target="_blank">🚌 Coach to The Met Transit Route</a>
             </div>
@@ -374,10 +1185,16 @@
                 </div>
                 <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Metropolitan+Museum+of+Art&destination=Palace+Theatre+160+W+47th+St+New+York&travelmode=transit" target="_blank">🚇 The Met to Palace Theatre Transit Route</a>
             </div>
-        </div>
+            </div>
+        </section>
 
         <!-- MON OCT 12 -->
-        <div class="day-group day-mon">
+        <section class="day-group day-mon" aria-labelledby="day-mon">
+            <div class="day-heading">
+                <h2 id="day-mon">Monday</h2>
+                <p>October 12</p>
+            </div>
+            <div class="day-activities">
             <div class="card">
                 <div class="card-header">
                     <span class="tag tag-college">Tour</span>
@@ -414,10 +1231,16 @@
                 </div>
                 <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Columbia+University&destination=FAO+Schwarz+30+Rockefeller+Plaza&travelmode=transit" target="_blank">🚇 1-Train Route: Columbia to FAO Schwarz</a>
             </div>
-        </div>
+            </div>
+        </section>
 
         <!-- TUE OCT 13 -->
-        <div class="day-group day-tue">
+        <section class="day-group day-tue" aria-labelledby="day-tue">
+            <div class="day-heading">
+                <h2 id="day-tue">Tuesday</h2>
+                <p>October 13</p>
+            </div>
+            <div class="day-activities">
             <div class="card">
                 <div class="card-header">
                     <span class="tag tag-college">Tour</span>
@@ -430,10 +1253,16 @@
                 </div>
                 <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=Hofstra+University+Bernon+Hall&travelmode=transit" target="_blank">🚆 Full Transit Route: SoHo to Hofstra</a>
             </div>
-        </div>
+            </div>
+        </section>
 
         <!-- WED OCT 14 -->
-        <div class="day-group day-wed">
+        <section class="day-group day-wed" aria-labelledby="day-wed">
+            <div class="day-heading">
+                <h2 id="day-wed">Wednesday</h2>
+                <p>October 14</p>
+            </div>
+            <div class="day-activities">
             <div class="card">
                 <div class="card-header">
                     <span class="tag tag-college">Tour</span>
@@ -458,11 +1287,12 @@
                 </div>
                 <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=LaGuardia+Airport&travelmode=driving" target="_blank">🚗 Hotel to LGA Drive Route</a>
             </div>
-        </div>
+            </div>
+        </section>
     </div>
 
     <!-- SUBWAY MAPS & TRANSIT GUIDE TAB -->
-    <div id="maps" class="tab-content">
+    <div id="maps" class="tab-content" role="tabpanel" aria-labelledby="tab-maps" aria-hidden="true">
         <div class="card">
             <div class="card-title">🗽 Subway & Transit Navigator</div>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Tap any button below to open live, turn-by-turn MTA subway & transit directions directly in Google Maps.</p>
@@ -500,7 +1330,7 @@
     </div>
 
     <!-- VAULT TAB -->
-    <div id="vault" class="tab-content">
+    <div id="vault" class="tab-content" role="tabpanel" aria-labelledby="tab-vault" aria-hidden="true">
         <div class="card">
             <div class="card-title" style="margin-bottom: 12px;">Confirmation Vault</div>
             
@@ -563,50 +1393,84 @@
     </div>
 
     <!-- SOHO SPOTS TAB -->
-    <div id="spots" class="tab-content">
+    <div id="spots" class="tab-content" role="tabpanel" aria-labelledby="tab-spots" aria-hidden="true">
         <div class="card">
             <div class="card-title">Nearby SoHo Highlights</div>
             <div class="card-details" style="margin-top: 8px;">
                 <strong>Dominique Ansel Bakery</strong> (189 Spring St)<br>
-                Original Cronuts & DKA pastry.<br>
+                Original Cronuts & DKA pastry. Typical hours: daily 8:00 AM–7:00 PM.<br>
                 <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Dominique+Ansel+Bakery+189+Spring+St" target="_blank">📍 Map Spot</a><br><br>
 
                 <strong>Prince Street Pizza</strong> (27 Prince St)<br>
-                Famous crispy square Sicilian pepperoni slices.<br>
+                Famous crispy square Sicilian pepperoni slices. Typical hours: Sun–Thu 11:00 AM–11:00 PM; Fri–Sat 11:00 AM–midnight.<br>
                 <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Prince+Street+Pizza+27+Prince+St" target="_blank">📍 Map Spot</a><br><br>
 
                 <strong>McNally Jackson Books</strong> (52 Prince St)<br>
-                Iconic independent bookstore & cafe.<br>
+                Iconic independent bookstore & cafe. Typical hours: Mon–Sat 10:00 AM–9:00 PM; Sun 10:00 AM–8:00 PM.<br>
                 <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=McNally+Jackson+Books+52+Prince+St" target="_blank">📍 Map Spot</a><br><br>
 
                 <strong>Glossier Flagship</strong> (126 Spring St)<br>
-                Interactive beauty showroom.<br>
+                Interactive beauty showroom. Typical hours: daily 11:00 AM–7:00 PM.<br>
                 <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Glossier+SoHo+126+Spring+St" target="_blank">📍 Map Spot</a><br><br>
 
                 <strong>Vesuvio Bakery</strong> (160 Prince St)<br>
-                1920s Italian storefront bakery.<br>
+                1920s Italian storefront bakery. Typical hours: daily 8:00 AM–6:00 PM.<br>
                 <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Vesuvio+Bakery+160+Prince+St" target="_blank">📍 Map Spot</a>
+                <br><br><small>Hours may change; confirm with each venue before visiting.</small>
             </div>
         </div>
     </div>
 
     <script>
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
+        function switchTab(tabId, button) {
+            document.querySelectorAll('.tab-content').forEach(panel => {
+                const isActive = panel.id === tabId;
+                panel.classList.toggle('active', isActive);
+                panel.setAttribute('aria-hidden', String(!isActive));
+            });
+            document.querySelectorAll('nav [role="tab"]').forEach(tab => {
+                const isActive = tab === button;
+                tab.classList.toggle('active', isActive);
+                tab.setAttribute('aria-selected', String(isActive));
+                tab.tabIndex = isActive ? 0 : -1;
+            });
         }
 
-        function filterDay(dayClass) {
-            document.querySelectorAll('.day-btn').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
+        function handleTabKey(event) {
+            const tabs = Array.from(document.querySelectorAll('nav [role="tab"]'));
+            const currentIndex = tabs.indexOf(document.activeElement);
+            let nextIndex;
+
+            if (event.key === 'ArrowRight') {
+                nextIndex = (currentIndex + 1) % tabs.length;
+            } else if (event.key === 'ArrowLeft') {
+                nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+            } else if (event.key === 'Home') {
+                nextIndex = 0;
+            } else if (event.key === 'End') {
+                nextIndex = tabs.length - 1;
+            } else {
+                return;
+            }
+
+            event.preventDefault();
+            tabs[nextIndex].focus();
+            tabs[nextIndex].click();
+        }
+
+        function filterDay(dayClass, button) {
+            document.querySelectorAll('.day-btn').forEach(dayButton => {
+                const isActive = dayButton === button;
+                dayButton.classList.toggle('active', isActive);
+                dayButton.setAttribute('aria-pressed', String(isActive));
+            });
 
             if (dayClass === 'all') {
-                document.querySelectorAll('.day-group').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.day-group').forEach(day => day.hidden = false);
             } else {
-                document.querySelectorAll('.day-group').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.day-' + dayClass).forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.day-group').forEach(day => {
+                    day.hidden = !day.classList.contains('day-' + dayClass);
+                });
             }
         }
     </script>
