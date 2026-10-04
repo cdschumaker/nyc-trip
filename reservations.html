@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations | NYC College Tour &amp; Trip</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <nav class="site-nav" aria-label="Trip planning pages">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu">
+            <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <div class="nav-menu" id="site-menu">
+            <a href="NYC_Trip_Dashboard_v5.html">Itinerary</a>
+            <a href="subway-maps.html">Subway Maps</a>
+            <a href="reservations.html" class="active" aria-current="page">Reservations</a>
+            <a href="soho-spots.html">SoHo Spots</a>
+        </div>
+    </nav>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="eyebrow">A New York getaway</div>
+            <h1>NYC Trip & College Tour</h1>
+            <p>Oct 10 – Oct 14, 2026 • Christine, Joey &amp; Vesper</p>
+            <div class="quick-info">
+                <div class="info-pill">
+                    <span>Arrival · Sat Oct 10</span>
+                    American Airlines AA 4591 · LGA 2:17 PM
+                </div>
+                <div class="info-pill">
+                    <span>Hotel</span>
+                    Four Points SoHo
+                </div>
+                <div class="info-pill">
+                    <span>Return · Wed Oct 14</span>
+                    American Airlines AA 4554 · LGA 6:31 PM
+                </div>
+            </div>
+        </div>
+    </header>
+
+<main id="vault" class="page-content active">
+        <div class="card">
+            <div class="card-title" style="margin-bottom: 12px;">Confirmation Vault</div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Four Points SoHo Hotel</div>
+                    <div class="vault-sub">Check-in Oct 10 • 2 Queens</div>
+                </div>
+                <div class="vault-code">#87049804</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">The Lost Boys Broadway</div>
+                    <div class="vault-sub">Sun Oct 11, 7:30 PM • 3 Tickets</div>
+                </div>
+                <div class="vault-code">#TGSRXK3</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Jellycat Diner FAO Schwarz</div>
+                    <div class="vault-sub">Mon Oct 12, 7:00 PM</div>
+                </div>
+                <div class="vault-code">#379448261</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Barnard College Tour</div>
+                    <div class="vault-sub">Mon Oct 12, 10:30 AM</div>
+                </div>
+                <div class="vault-code">Confirmed</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Columbia University Tour</div>
+                    <div class="vault-sub">Mon Oct 12, 3:00 PM</div>
+                </div>
+                <div class="vault-code">Confirmed</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Hofstra University Tour</div>
+                    <div class="vault-sub">Tue Oct 13, 2:00 PM</div>
+                </div>
+                <div class="vault-code">Confirmed</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">NYU Campus Tour</div>
+                    <div class="vault-sub">Wed Oct 14, 11:00 AM</div>
+                </div>
+                <div class="vault-code">Confirmed</div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.querySelectorAll(".site-nav").forEach(nav => {
+            const toggle = nav.querySelector(".menu-toggle");
+
+            const closeMenu = (restoreFocus = false) => {
+                nav.classList.remove("is-open");
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.setAttribute("aria-label", "Open navigation");
+
+                if (restoreFocus) {
+                    toggle.focus();
+                }
+            };
+
+            toggle.addEventListener("click", () => {
+                const isOpen = toggle.getAttribute("aria-expanded") === "true";
+                nav.classList.toggle("is-open", !isOpen);
+                toggle.setAttribute("aria-expanded", String(!isOpen));
+                toggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+            });
+
+            nav.addEventListener("keydown", event => {
+                if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+                    event.preventDefault();
+                    closeMenu(true);
+                }
+            });
+
+            document.addEventListener("click", event => {
+                if (!nav.contains(event.target)) {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

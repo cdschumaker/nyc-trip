@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoHo Spots | NYC College Tour &amp; Trip</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <nav class="site-nav" aria-label="Trip planning pages">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu">
+            <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <div class="nav-menu" id="site-menu">
+            <a href="NYC_Trip_Dashboard_v5.html">Itinerary</a>
+            <a href="subway-maps.html">Subway Maps</a>
+            <a href="reservations.html">Reservations</a>
+            <a href="soho-spots.html" class="active" aria-current="page">SoHo Spots</a>
+        </div>
+    </nav>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="eyebrow">A New York getaway</div>
+            <h1>NYC Trip & College Tour</h1>
+            <p>Oct 10 – Oct 14, 2026 • Christine, Joey &amp; Vesper</p>
+            <div class="quick-info">
+                <div class="info-pill">
+                    <span>Arrival · Sat Oct 10</span>
+                    American Airlines AA 4591 · LGA 2:17 PM
+                </div>
+                <div class="info-pill">
+                    <span>Hotel</span>
+                    Four Points SoHo
+                </div>
+                <div class="info-pill">
+                    <span>Return · Wed Oct 14</span>
+                    American Airlines AA 4554 · LGA 6:31 PM
+                </div>
+            </div>
+        </div>
+    </header>
+
+<main id="spots" class="page-content active">
+        <div class="card">
+            <div class="card-title">Nearby SoHo Highlights</div>
+            <div class="card-details" style="margin-top: 8px;">
+                <strong>Dominique Ansel Bakery</strong> (189 Spring St)<br>
+                Original Cronuts & DKA pastry. Typical hours: daily 8:00 AM–7:00 PM.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Dominique+Ansel+Bakery+189+Spring+St" target="_blank">📍 Map Spot</a><br><br>
+
+                <strong>Prince Street Pizza</strong> (27 Prince St)<br>
+                Famous crispy square Sicilian pepperoni slices. Typical hours: Sun–Thu 11:00 AM–11:00 PM; Fri–Sat 11:00 AM–midnight.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Prince+Street+Pizza+27+Prince+St" target="_blank">📍 Map Spot</a><br><br>
+
+                <strong>McNally Jackson Books</strong> (52 Prince St)<br>
+                Iconic independent bookstore & cafe. Typical hours: Mon–Sat 10:00 AM–9:00 PM; Sun 10:00 AM–8:00 PM.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=McNally+Jackson+Books+52+Prince+St" target="_blank">📍 Map Spot</a><br><br>
+
+                <strong>Glossier Flagship</strong> (126 Spring St)<br>
+                Interactive beauty showroom. Typical hours: daily 11:00 AM–7:00 PM.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Glossier+SoHo+126+Spring+St" target="_blank">📍 Map Spot</a><br><br>
+
+                <strong>Vesuvio Bakery</strong> (160 Prince St)<br>
+                1920s Italian storefront bakery. Typical hours: daily 8:00 AM–6:00 PM.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Vesuvio+Bakery+160+Prince+St" target="_blank">📍 Map Spot</a>
+                <br><br><small>Hours may change; confirm with each venue before visiting.</small>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.querySelectorAll(".site-nav").forEach(nav => {
+            const toggle = nav.querySelector(".menu-toggle");
+
+            const closeMenu = (restoreFocus = false) => {
+                nav.classList.remove("is-open");
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.setAttribute("aria-label", "Open navigation");
+
+                if (restoreFocus) {
+                    toggle.focus();
+                }
+            };
+
+            toggle.addEventListener("click", () => {
+                const isOpen = toggle.getAttribute("aria-expanded") === "true";
+                nav.classList.toggle("is-open", !isOpen);
+                toggle.setAttribute("aria-expanded", String(!isOpen));
+                toggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+            });
+
+            nav.addEventListener("keydown", event => {
+                if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+                    event.preventDefault();
+                    closeMenu(true);
+                }
+            });
+
+            document.addEventListener("click", event => {
+                if (!nav.contains(event.target)) {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

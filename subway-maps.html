@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subway Maps | NYC College Tour &amp; Trip</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <nav class="site-nav" aria-label="Trip planning pages">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu">
+            <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <div class="nav-menu" id="site-menu">
+            <a href="NYC_Trip_Dashboard_v5.html">Itinerary</a>
+            <a href="subway-maps.html" class="active" aria-current="page">Subway Maps</a>
+            <a href="reservations.html">Reservations</a>
+            <a href="soho-spots.html">SoHo Spots</a>
+        </div>
+    </nav>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="eyebrow">A New York getaway</div>
+            <h1>NYC Trip & College Tour</h1>
+            <p>Oct 10 – Oct 14, 2026 • Christine, Joey &amp; Vesper</p>
+            <div class="quick-info">
+                <div class="info-pill">
+                    <span>Arrival · Sat Oct 10</span>
+                    American Airlines AA 4591 · LGA 2:17 PM
+                </div>
+                <div class="info-pill">
+                    <span>Hotel</span>
+                    Four Points SoHo
+                </div>
+                <div class="info-pill">
+                    <span>Return · Wed Oct 14</span>
+                    American Airlines AA 4554 · LGA 6:31 PM
+                </div>
+            </div>
+        </div>
+    </header>
+
+<main id="maps" class="page-content active">
+        <div class="card">
+            <div class="card-title">🗽 Subway & Transit Navigator</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Tap any button below to open live, turn-by-turn MTA subway & transit directions directly in Google Maps.</p>
+
+            <div class="subway-route">
+                <strong>1 Train (Red Line) — Hotel Station: Houston St</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">Walk 3 mins east from hotel to Varick & Houston St.</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=Houston+St+Subway+Station&travelmode=walking" target="_blank">🚶 Walk to Houston St Station</a>
+            </div>
+
+            <div class="subway-route">
+                <strong>Subway to Barnard & Columbia</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">Uptown 1 Train direct from Houston St to 116th St (~28 min).</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Houston+St+Subway+Station&destination=116+St+-+Columbia+University+Station&travelmode=transit" target="_blank">🚇 Houston St to 116th St (1 Train)</a>
+            </div>
+
+            <div class="subway-route">
+                <strong>Subway to Rockefeller Center / FAO Schwarz</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">Downtown 1 Train to 50th St or C Train to 50th St.</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=116+St+-+Columbia+University+Station&destination=FAO+Schwarz+30+Rockefeller+Plaza&travelmode=transit" target="_blank">🚇 Columbia to Rockefeller Center</a>
+            </div>
+
+            <div class="subway-route">
+                <strong>Subway & LIRR to Hofstra University</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">1 Train north to Penn Station → LIRR Hempstead Branch to Hempstead Station → Uber/N70 Bus.</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=Hofstra+University&travelmode=transit" target="_blank">🚆 Full Penn Station & LIRR Transit Map</a>
+            </div>
+
+            <div class="subway-route">
+                <strong>Subway to Palace Theatre (The Lost Boys)</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">M1-M4 Bus down 5th Ave or C/1 Train to 50th St / Times Sq.</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Metropolitan+Museum+of+Art&destination=Palace+Theatre+160+W+47th+St&travelmode=transit" target="_blank">🚇 The Met to Palace Theatre</a>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.querySelectorAll(".site-nav").forEach(nav => {
+            const toggle = nav.querySelector(".menu-toggle");
+
+            const closeMenu = (restoreFocus = false) => {
+                nav.classList.remove("is-open");
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.setAttribute("aria-label", "Open navigation");
+
+                if (restoreFocus) {
+                    toggle.focus();
+                }
+            };
+
+            toggle.addEventListener("click", () => {
+                const isOpen = toggle.getAttribute("aria-expanded") === "true";
+                nav.classList.toggle("is-open", !isOpen);
+                toggle.setAttribute("aria-expanded", String(!isOpen));
+                toggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+            });
+
+            nav.addEventListener("keydown", event => {
+                if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+                    event.preventDefault();
+                    closeMenu(true);
+                }
+            });
+
+            document.addEventListener("click", event => {
+                if (!nav.contains(event.target)) {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

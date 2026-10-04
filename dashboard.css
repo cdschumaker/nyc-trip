@@ -1,0 +1,1136 @@
+@font-face {
+            font-family: "NYU Perstare";
+            src: url("https://webstatic.nyu.edu/fonts/NYUPerstare-VF.woff2") format("woff2");
+            font-style: normal;
+            font-weight: 100 900;
+            font-display: swap;
+        }
+
+        :root {
+            color-scheme: light;
+            --ink: #24332f;
+            --ink-soft: #445650;
+            --muted: #687771;
+            --paper: #f5f4ef;
+            --surface: #fffefa;
+            --line: #e3e4dc;
+            --accent: #a45036;
+            --accent-dark: #873e2b;
+            --accent-pale: #f5e9e3;
+            --sage: #e7eee7;
+            --shadow: 0 12px 30px rgba(36, 51, 47, 0.06);
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding-bottom: 72px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        button, a {
+            font: inherit;
+        }
+
+        button:focus-visible, a:focus-visible {
+            outline: 3px solid #bb765d;
+            outline-offset: 3px;
+        }
+
+        nav {
+            position: sticky;
+            z-index: 5;
+            top: 0;
+            display: flex;
+            gap: 4px;
+            width: min(100% - 40px, 1040px);
+            margin: 22px auto 0;
+            padding: 5px;
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: rgba(255, 254, 250, 0.96);
+            box-shadow: 0 5px 18px rgba(36, 51, 47, 0.07);
+            scrollbar-width: thin;
+        }
+
+        nav a {
+            flex: 1 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 9px 16px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 650;
+            text-decoration: none;
+            transition: background-color 160ms ease, color 160ms ease;
+            white-space: nowrap;
+        }
+
+        nav a:hover:not(.active) {
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        nav a.active {
+            background: var(--ink);
+            color: #fffefa;
+        }
+
+        .page-content {
+            display: block;
+            width: min(100% - 40px, 1040px);
+            margin: 0 auto;
+            padding-top: 18px;
+        }
+
+
+        .day-filter {
+            display: flex;
+            gap: 8px;
+            margin: 4px 0 26px;
+            padding: 0 0 3px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .day-btn {
+            flex: 0 0 auto;
+            min-height: 42px;
+            padding: 8px 16px;
+            border: 1px solid #d9ddd5;
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--ink-soft);
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 650;
+            transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+        }
+
+        .day-btn:hover:not(.active) {
+            border-color: var(--ink-soft);
+            background: #f0f0e9;
+        }
+
+        .day-btn.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        .day-group[hidden] {
+            display: none;
+        }
+
+        .day-group {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            margin-bottom: 36px;
+        }
+
+        .day-heading {
+            display: flex;
+            align-items: baseline;
+            gap: 11px;
+            margin: 0 0 12px 2px;
+            padding: 5px 0 0 15px;
+            border-left: 2px solid var(--accent);
+        }
+
+        .day-heading h2 {
+            margin: 0;
+            font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.55rem;
+            font-weight: 500;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        .day-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .day-activities {
+            min-width: 0;
+        }
+
+        .card {
+            margin: 0 0 13px;
+            padding: 20px 22px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: 0 2px 7px rgba(36, 51, 47, 0.035);
+            transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+        }
+
+        .card:hover {
+            transform: translateY(-1px);
+            border-color: #d5d6cc;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 25px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 750;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .tag-college { background: #e6edf1; color: #345868; }
+        .tag-show { background: #f3e7e8; color: #78414a; }
+        .tag-food { background: #f5eadf; color: #81502f; }
+        .tag-transit { background: #eceeea; color: #4f5d55; }
+        .tag-hotel { background: var(--sage); color: #3f6048; }
+
+        .time-badge {
+            flex: 0 0 auto;
+            color: var(--accent-dark);
+            font-size: 0.86rem;
+            font-weight: 750;
+            font-variant-numeric: tabular-nums;
+            text-align: right;
+        }
+
+        .card-title {
+            margin-bottom: 5px;
+            color: var(--ink);
+            font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.28rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+        }
+
+        .card-location {
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+            margin: 0 0 8px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .card-details {
+            margin-top: 12px;
+            padding: 12px 14px;
+            border: 1px solid #ebece5;
+            border-radius: 9px;
+            background: #f7f7f2;
+            color: var(--ink-soft);
+            font-size: 0.91rem;
+            line-height: 1.6;
+        }
+
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 40px;
+            margin-top: 12px;
+            padding: 8px 13px;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            line-height: 1.35;
+            text-decoration: none;
+            transition: background-color 160ms ease, border-color 160ms ease;
+        }
+
+        .map-btn:hover {
+            border-color: var(--accent-dark);
+            background: var(--accent-dark);
+        }
+
+        .vault-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .vault-item:last-child {
+            border-bottom: 0;
+        }
+
+        .vault-label {
+            color: var(--ink);
+            font-size: 0.98rem;
+            font-weight: 700;
+        }
+
+        .vault-sub {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .vault-code {
+            flex: 0 0 auto;
+            padding: 6px 10px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .subway-route {
+            margin: 19px 0;
+            padding: 3px 0 3px 16px;
+            border-left: 2px solid #9b745f;
+        }
+
+        .subway-route strong {
+            color: var(--ink);
+            font-size: 1rem;
+        }
+
+        .subway-route p {
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        #spots .card-details {
+            padding: 4px 0 0;
+            border: 0;
+            background: transparent;
+        }
+
+        #spots .card-details strong {
+            color: var(--ink);
+        }
+
+        #spots .card-details small {
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding-bottom: 40px;
+            }
+
+            nav {
+                top: 0;
+                width: calc(100% - 24px);
+                margin-top: 12px;
+            }
+
+            nav a {
+                min-height: 42px;
+                padding-inline: 13px;
+                font-size: 0.84rem;
+            }
+
+            .page-content {
+                width: calc(100% - 28px);
+                padding-top: 15px;
+            }
+
+            .day-filter {
+                margin-bottom: 22px;
+            }
+
+            .day-group {
+                display: block;
+                margin-bottom: 28px;
+            }
+
+            .day-heading {
+                position: static;
+                margin: 0 0 12px 2px;
+                padding: 2px 0 2px 12px;
+            }
+
+            .day-heading h2 {
+                font-size: 1.4rem;
+            }
+
+            .card {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .quick-info {
+                grid-template-columns: 1fr;
+            }
+
+            .card-header {
+                align-items: flex-start;
+            }
+
+            .time-badge {
+                max-width: 46%;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Editorial travel system */
+        :root {
+            --ink: #0b0b0b;
+            --ink-soft: #333039;
+            --muted: #625c68;
+            --paper: #f8f7f9;
+            --surface: #ffffff;
+            --line: #ded9e3;
+            --accent: #57068c;
+            --accent-dark: #3f0068;
+            --accent-pale: #f0e8f5;
+            --sage: #eee8f3;
+            --shadow: 0 12px 28px rgba(36, 10, 54, 0.08);
+            --radius: 0;
+        }
+
+        body {
+            padding-bottom: 64px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        button, a {
+            font-family: inherit;
+        }
+
+        button:focus-visible, a:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .site-header {
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        .site-header-inner {
+            width: min(100% - 64px, 1120px);
+            margin: 0 auto;
+            padding: 28px 0 34px;
+        }
+
+        .site-header .eyebrow,
+        .section-kicker {
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            line-height: 1.4;
+            text-transform: uppercase;
+        }
+
+        .site-header h1 {
+            max-width: none;
+            margin: 10px 0 11px;
+            font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
+            font-size: clamp(1.8rem, 3.6vw, 3rem);
+            font-weight: 500;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .site-header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        .site-header .quick-info {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0;
+            max-width: 880px;
+            margin-top: 32px;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .site-header .info-pill {
+            min-width: 0;
+            padding: 15px 20px 15px 0;
+            border: 0;
+            border-radius: 0;
+            color: var(--ink);
+            font-size: 0.93rem;
+        }
+
+        .site-header .info-pill + .info-pill {
+            padding-left: 20px;
+            border-left: 1px solid var(--line);
+        }
+
+        .site-header .info-pill span {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--muted);
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            width: min(100% - 64px, 1120px);
+            margin-top: 0;
+            padding: 0;
+            gap: 28px;
+            overflow-x: auto;
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            border-radius: 0;
+            background: var(--paper);
+            box-shadow: none;
+        }
+
+        nav a {
+            position: relative;
+            min-height: 58px;
+            padding: 13px 2px;
+            border-radius: 0;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        nav a:hover:not(.active) {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        nav a.active {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        nav a.active::after {
+            position: absolute;
+            right: 0;
+            bottom: -1px;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            content: "";
+        }
+
+        .page-content {
+            width: min(100% - 64px, 1120px);
+            padding-top: 30px;
+        }
+
+        .day-filter {
+            gap: 0;
+            margin: 0 0 40px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .day-btn {
+            min-height: 45px;
+            padding: 8px 17px;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .day-btn:hover:not(.active) {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .day-btn.active {
+            position: relative;
+            border: 0;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .day-btn.active::after {
+            content: none;
+        }
+
+        .day-group {
+            margin-bottom: 53px;
+        }
+
+        .day-heading {
+            align-items: baseline;
+            gap: 14px;
+            margin: 0 0 8px;
+            padding: 0 0 14px;
+            border-left: 0;
+            border-bottom: 1px solid var(--ink);
+        }
+
+        .day-heading h2 {
+            font-size: clamp(1.9rem, 3.5vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: -0.045em;
+        }
+
+        .day-heading p {
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 650;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .card {
+            display: block;
+            margin: 0;
+            padding: 25px 10px 25px 0;
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            transition: background-color 160ms ease;
+        }
+
+        #itinerary .card {
+            display: grid;
+            grid-template-columns: minmax(120px, 0.24fr) minmax(0, 1fr);
+            grid-template-rows: auto auto auto auto;
+            grid-template-areas:
+                "meta title"
+                "meta location"
+                "meta details"
+                "meta action";
+            column-gap: 30px;
+        }
+
+        #itinerary .card-header { grid-area: meta; }
+        #itinerary .card-title { grid-area: title; }
+        #itinerary .card-location { grid-area: location; }
+        #itinerary .card-details { grid-area: details; }
+        #itinerary .map-btn { grid-area: action; }
+
+        .card:hover {
+            transform: none;
+            border-color: var(--line);
+            background: rgba(255, 253, 249, 0.62);
+            box-shadow: none;
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            justify-content: flex-end;
+            gap: 7px;
+            margin: 3px 0 0;
+        }
+
+        .tag {
+            min-height: 0;
+            padding: 0;
+            border-radius: 0;
+            background: transparent !important;
+            color: var(--muted) !important;
+            font-size: 0.66rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+        }
+
+        .time-badge {
+            color: var(--accent);
+            font-size: 1.08rem;
+            font-weight: 800;
+            line-height: 1.25;
+            text-align: left;
+        }
+
+        .card-title {
+            margin: 0;
+            font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
+            font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.22;
+        }
+
+        .card-location {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 0.91rem;
+        }
+
+        .card-details {
+            margin-top: 12px;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            color: var(--ink-soft);
+            font-size: 0.93rem;
+            line-height: 1.65;
+        }
+
+        .map-btn {
+            justify-self: start;
+            min-height: 42px;
+            margin-top: 15px;
+            padding: 9px 15px;
+            border: 1px solid var(--accent);
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.84rem;
+            font-weight: 750;
+        }
+
+        .map-btn:hover {
+            border-color: var(--accent-dark);
+            background: var(--accent-dark);
+        }
+
+        #maps > .card,
+        #vault > .card,
+        #spots > .card {
+            padding: 28px 32px;
+            border-top: 3px solid var(--ink);
+            border-bottom: 1px solid var(--line);
+            background: var(--surface);
+        }
+
+        #maps .card-title,
+        #vault .card-title,
+        #spots .card-title {
+            margin-bottom: 20px !important;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            line-height: 1.12;
+        }
+
+        #maps > .card > p {
+            max-width: 690px;
+            color: var(--muted) !important;
+            font-size: 0.98rem !important;
+        }
+
+        .subway-route {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 6px 22px;
+            margin: 0;
+            padding: 19px 0;
+            border-top: 1px solid var(--line);
+            border-left: 0;
+        }
+
+        .subway-route strong {
+            grid-column: 1;
+            font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.17rem;
+            font-weight: 600;
+        }
+
+        .subway-route p {
+            grid-column: 1;
+            margin: 0 !important;
+            font-size: 0.9rem !important;
+        }
+
+        .subway-route .map-btn {
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            margin-top: 0;
+        }
+
+        .vault-item {
+            min-height: 78px;
+            padding: 17px 0;
+            border-bottom-color: var(--line);
+        }
+
+        .vault-label {
+            font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.12rem;
+            font-weight: 600;
+        }
+
+        .vault-sub {
+            font-size: 0.9rem;
+        }
+
+        .vault-code {
+            padding: 7px 10px;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            background: transparent;
+            font-size: 0.84rem;
+        }
+
+        #spots .card-details {
+            margin-top: 0 !important;
+            padding: 0;
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+
+        #spots .card-details strong {
+            display: inline-block;
+            margin-top: 23px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            color: var(--ink);
+            font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.2rem;
+        }
+
+        #spots .card-details strong:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        #spots .card-details small {
+            display: block;
+            margin-top: 23px;
+            padding-top: 13px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        #spots .map-btn {
+            margin-top: 9px;
+        }
+
+        @media (max-width: 680px) {
+            nav {
+                width: calc(100% - 36px);
+                gap: 0;
+                overflow-x: hidden;
+            }
+
+            nav a {
+                flex: 1 1 0;
+                min-width: 0;
+                min-height: 53px;
+                padding: 10px 3px;
+                font-size: 0.75rem;
+                text-align: center;
+                white-space: normal;
+            }
+
+            .page-content {
+                width: calc(100% - 36px);
+                padding-top: 24px;
+            }
+
+            .day-filter {
+                margin-bottom: 30px;
+            }
+
+            .day-btn {
+                padding-inline: 13px;
+            }
+
+            .day-group {
+                margin-bottom: 38px;
+            }
+
+            .day-heading {
+                margin-bottom: 4px;
+                padding-bottom: 11px;
+            }
+
+            .card {
+                grid-template-columns: 86px minmax(0, 1fr);
+                column-gap: 16px;
+                padding: 20px 0;
+            }
+
+            .card-header {
+                gap: 6px;
+            }
+
+            .time-badge {
+                font-size: 0.97rem;
+            }
+
+            .tag {
+                font-size: 0.58rem;
+                letter-spacing: 0.09em;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            .card-location,
+            .card-details {
+                font-size: 0.88rem;
+            }
+
+            #maps > .card,
+            #vault > .card,
+            #spots > .card {
+                padding: 22px 19px;
+            }
+
+            .subway-route {
+                grid-template-columns: 1fr;
+                gap: 5px;
+                padding: 17px 0;
+            }
+
+            .subway-route strong,
+            .subway-route p,
+            .subway-route .map-btn {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            .subway-route .map-btn {
+                margin-top: 8px;
+            }
+
+            .vault-item {
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .site-header-inner,
+            nav,
+            .page-content {
+                width: calc(100% - 28px);
+            }
+
+            .card {
+                grid-template-columns: 70px minmax(0, 1fr);
+                column-gap: 12px;
+            }
+
+            .time-badge {
+                font-size: 0.9rem;
+            }
+
+            .card-title {
+                font-size: 1.18rem;
+            }
+
+            .vault-item {
+                flex-direction: column;
+            }
+        }
+
+        .site-header-inner {
+            width: calc(100% - 36px);
+            padding: 20px 0 26px;
+        }
+
+        .site-header h1 {
+            font-size: clamp(1.2rem, 6.1vw, 2rem);
+            letter-spacing: -0.045em;
+        }
+
+        .site-header .quick-info {
+            grid-template-columns: 1fr;
+            margin-top: 24px;
+        }
+
+        .site-header .info-pill,
+        .site-header .info-pill + .info-pill {
+            padding: 12px 0;
+            border-left: 0;
+        }
+
+        .site-header .info-pill + .info-pill {
+            border-top: 1px solid var(--line);
+        }
+
+        nav.site-nav {
+            position: sticky;
+            z-index: 10;
+            top: 0;
+            display: flex;
+            justify-content: flex-start;
+            width: min(100% - 64px, 1120px);
+            min-height: 70px;
+            margin: 0 auto;
+            padding: 12px 0;
+            overflow: visible;
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            border-radius: 0;
+            background: var(--paper);
+            box-shadow: none;
+        }
+
+        .menu-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            min-width: 46px;
+            min-height: 44px;
+            padding: 9px;
+            border: 1px solid var(--ink);
+            border-radius: 999px;
+            background: var(--ink);
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 700;
+            transition: background-color 160ms ease, border-color 160ms ease;
+        }
+
+        .menu-toggle:hover {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+
+        .menu-icon {
+            display: grid;
+            gap: 4px;
+            width: 17px;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 17px;
+            height: 2px;
+            border-radius: 2px;
+            background: currentColor;
+            transition: transform 160ms ease, opacity 160ms ease;
+        }
+
+        .menu-toggle[aria-expanded="true"] .menu-icon span:first-child {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .menu-toggle[aria-expanded="true"] .menu-icon span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle[aria-expanded="true"] .menu-icon span:last-child {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .site-nav .nav-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            display: none;
+            width: min(300px, calc(100vw - 36px));
+            padding: 8px;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .site-nav.is-open .nav-menu {
+            display: grid;
+        }
+
+        .site-nav .nav-menu a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 48px;
+            padding: 11px 13px;
+            border-radius: 0;
+            color: var(--ink);
+            font-size: 0.93rem;
+            font-weight: 650;
+            text-decoration: none;
+            transition: background-color 140ms ease, color 140ms ease;
+        }
+
+        .site-nav .nav-menu a:hover,
+        .site-nav .nav-menu a:focus-visible {
+            background: var(--accent-pale);
+            color: var(--accent);
+        }
+
+        .site-nav .nav-menu a.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .site-nav .nav-menu a.active::after {
+            content: none;
+        }
+
+        @media (max-width: 680px) {
+            nav.site-nav {
+                width: calc(100% - 36px);
+                min-height: 62px;
+                padding: 9px 0;
+                gap: 0;
+                overflow: visible;
+            }
+
+            .menu-toggle {
+                min-height: 43px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .site-header-inner {
+                width: calc(100% - 28px);
+            }
+
+            nav.site-nav {
+                width: calc(100% - 28px);
+            }
+        }
