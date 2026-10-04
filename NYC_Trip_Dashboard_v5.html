@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC College Tour & Trip Dashboard | Oct 10–14, 2026</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #2563eb;
+            --accent-light: #eff6ff;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 80px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 24px 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .quick-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .info-pill {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+
+        .info-pill span {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            background: var(--card-bg);
+            margin: 16px 16px 0;
+            border-radius: var(--radius);
+            padding: 4px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        nav button {
+            flex: 1;
+            padding: 10px 8px;
+            border: none;
+            background: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        nav button.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .day-filter {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 16px;
+            scrollbar-width: none;
+        }
+
+        .day-filter::-webkit-scrollbar {
+            display: none;
+        }
+
+        .day-btn {
+            flex: 0 0 auto;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card-bg);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .day-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 0 16px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .time-badge {
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .card-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .card-details {
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.4;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #2563eb;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+
+        .map-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 4px;
+        }
+
+        .tag-college { background: #e0f2fe; color: #0369a1; }
+        .tag-show { background: #fce7f3; color: #be185d; }
+        .tag-food { background: #fef3c7; color: #b45309; }
+        .tag-transit { background: #f1f5f9; color: #475569; }
+        .tag-hotel { background: #dcfce7; color: #15803d; }
+
+        .vault-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .vault-item:last-child {
+            border-bottom: none;
+        }
+
+        .vault-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .vault-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .vault-code {
+            font-family: monospace;
+            background: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .subway-route {
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+            margin: 10px 0;
+        }
+
+        .subway-route strong {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NYC Trip & College Tour 🗽</h1>
+        <p>Oct 10 – Oct 14, 2026 • 3 Travelers</p>
+        <div class="quick-info">
+            <div class="info-pill">
+                <span>Hotel</span>
+                Four Points SoHo
+            </div>
+            <div class="info-pill">
+                <span>Show</span>
+                The Lost Boys (Sun 7:30)
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <button class="active" onclick="switchTab('itinerary')">Itinerary</button>
+        <button onclick="switchTab('maps')">Subway Maps</button>
+        <button onclick="switchTab('vault')">Reservations</button>
+        <button onclick="switchTab('spots')">SoHo Spots</button>
+    </nav>
+
+    <!-- ITINERARY TAB -->
+    <div id="itinerary" class="tab-content active">
+        <div class="day-filter">
+            <button class="day-btn active" onclick="filterDay('all')">All Days</button>
+            <button class="day-btn" onclick="filterDay('sat')">Sat 10</button>
+            <button class="day-btn" onclick="filterDay('sun')">Sun 11</button>
+            <button class="day-btn" onclick="filterDay('mon')">Mon 12</button>
+            <button class="day-btn" onclick="filterDay('tue')">Tue 13</button>
+            <button class="day-btn" onclick="filterDay('wed')">Wed 14</button>
+        </div>
+
+        <!-- SAT OCT 10 -->
+        <div class="day-group day-sat">
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-hotel">Flight & Arrival</span>
+                    <span class="time-badge">2:17 PM</span>
+                </div>
+                <div class="card-title">Arrive at LaGuardia (LGA)</div>
+                <div class="card-location">📍 American Airlines AA 4591</div>
+                <div class="card-details">
+                    Rideshare/Taxi (~35-45 mins) directly to Four Points SoHo (66 Charlton St).
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=LaGuardia+Airport&destination=Four+Points+by+Sheraton+Manhattan+SoHo+Village&travelmode=driving" target="_blank">🗺️ Navigate Drive on Google Maps</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-hotel">Hotel</span>
+                    <span class="time-badge">3:45 PM</span>
+                </div>
+                <div class="card-title">Check-in: Four Points SoHo</div>
+                <div class="card-location">📍 66 Charlton St, New York, NY</div>
+                <div class="card-details">
+                    Check into 2-Queen Room. Unpack and enjoy a late-afternoon stroll along Hudson River Park or Prince/Spring St.
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Four+Points+by+Sheraton+Manhattan+SoHo+Village+66+Charlton+St" target="_blank">📍 Open Hotel in Google Maps</a>
+            </div>
+        </div>
+
+        <!-- SUN OCT 11 -->
+        <div class="day-group day-sun">
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-food">Shopping</span>
+                    <span class="time-badge">10:30 AM</span>
+                </div>
+                <div class="card-title">Shopping on 5th Avenue</div>
+                <div class="card-location">📍 5th Avenue (52nd & 54th St)</div>
+                <div class="card-details">
+                    Browse Cartier Fifth Avenue Mansion (Hours: Sun 12:00 PM – 6:00 PM, Mon–Sat 10:00 AM – 7:00 PM) and Coach House Flagship (Hours: Sun 11:00 AM – 6:00 PM, Mon–Sat 10:00 AM – 8:00 PM; see giant bag-dinosaur "Rexy" & custom bar).
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=Cartier+5th+Avenue+New+York&travelmode=transit" target="_blank">🚇 Subway Directions to Cartier (Google Maps)</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-food">Museum</span>
+                    <span class="time-badge">1:30 PM - 4:30 PM</span>
+                </div>
+                <div class="card-title">The Metropolitan Museum of Art</div>
+                <div class="card-location">📍 1000 5th Ave</div>
+                <div class="card-details">
+                    Explore galleries. Closes at 5:00 PM on Sundays. Head down to Midtown for dinner afterward.
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Coach+5th+Avenue+New+York&destination=The+Metropolitan+Museum+of+Art&travelmode=transit" target="_blank">🚌 Coach to The Met Transit Route</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-show">Broadway</span>
+                    <span class="time-badge">7:30 PM</span>
+                </div>
+                <div class="card-title">The Lost Boys: A New Musical</div>
+                <div class="card-location">📍 Palace Theatre (160 W 47th St)</div>
+                <div class="card-details">
+                    Order #TGSRXK3 • Balcony C, Row B, Seats 106-108. Arrive by 7:00 PM.
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Metropolitan+Museum+of+Art&destination=Palace+Theatre+160+W+47th+St+New+York&travelmode=transit" target="_blank">🚇 The Met to Palace Theatre Transit Route</a>
+            </div>
+        </div>
+
+        <!-- MON OCT 12 -->
+        <div class="day-group day-mon">
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-college">Tour</span>
+                    <span class="time-badge">10:30 AM</span>
+                </div>
+                <div class="card-title">Barnard College Campus Tour</div>
+                <div class="card-location">📍 Broadway & W 117th St</div>
+                <div class="card-details">
+                    Take 1 Train from Houston St to 116th St (~28 min). Check-in at main gate by 10:20 AM.
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=Barnard+College+3009+Broadway&travelmode=transit" target="_blank">🚇 1-Train Route: SoHo to Barnard</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-college">Tour</span>
+                    <span class="time-badge">3:00 PM</span>
+                </div>
+                <div class="card-title">Columbia University Campus Tour</div>
+                <div class="card-location">📍 Broadway & W 116th St</div>
+                <div class="card-details">
+                    Enter via North Broadway entrance with IDs & Public Safety QR codes by 2:45 PM.
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Barnard+College&destination=Columbia+University&travelmode=walking" target="_blank">🚶 Walk Barnard to Columbia Gate</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-food">Reservation</span>
+                    <span class="time-badge">7:00 PM</span>
+                </div>
+                <div class="card-title">Jellycat Diner at FAO Schwarz</div>
+                <div class="card-location">📍 30 Rockefeller Plaza (49th St entrance)</div>
+                <div class="card-details">
+                    Booking #379448261 • Arrive at 49th St side entrance at 6:55 PM with confirmation email & ID.
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Columbia+University&destination=FAO+Schwarz+30+Rockefeller+Plaza&travelmode=transit" target="_blank">🚇 1-Train Route: Columbia to FAO Schwarz</a>
+            </div>
+        </div>
+
+        <!-- TUE OCT 13 -->
+        <div class="day-group day-tue">
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-college">Tour</span>
+                    <span class="time-badge">2:00 PM - 5:00 PM</span>
+                </div>
+                <div class="card-title">Hofstra University Tour & Info Session</div>
+                <div class="card-location">📍 Hempstead, Long Island</div>
+                <div class="card-details">
+                    11:45 AM: 1 Train to Penn Station → 12:20 PM LIRR to Hempstead → Uber/Bus to Bernon Hall.
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=Hofstra+University+Bernon+Hall&travelmode=transit" target="_blank">🚆 Full Transit Route: SoHo to Hofstra</a>
+            </div>
+        </div>
+
+        <!-- WED OCT 14 -->
+        <div class="day-group day-wed">
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-college">Tour</span>
+                    <span class="time-badge">11:00 AM</span>
+                </div>
+                <div class="card-title">NYU Campus Tour</div>
+                <div class="card-location">📍 27 W 4th St (Bonomi Admissions)</div>
+                <div class="card-details">
+                    10:00 AM check-out & luggage storage at hotel. Walk 12 mins north to NYU. Lunch near Washington Sq Park after.
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=NYU+Bonomi+Family+Admissions+Center&travelmode=walking" target="_blank">🚶 Walk Hotel to NYU Admissions</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag tag-transit">Flight</span>
+                    <span class="time-badge">6:31 PM</span>
+                </div>
+                <div class="card-title">Return Flight: LGA to XNA</div>
+                <div class="card-location">📍 LaGuardia Airport (LGA)</div>
+                <div class="card-details">
+                    1:45 PM grab luggage → 2:00 PM rideshare to LGA. Depart on AA 4554 (Arrives XNA 8:56 PM).
+                </div>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=LaGuardia+Airport&travelmode=driving" target="_blank">🚗 Hotel to LGA Drive Route</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBWAY MAPS & TRANSIT GUIDE TAB -->
+    <div id="maps" class="tab-content">
+        <div class="card">
+            <div class="card-title">🗽 Subway & Transit Navigator</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Tap any button below to open live, turn-by-turn MTA subway & transit directions directly in Google Maps.</p>
+
+            <div class="subway-route">
+                <strong>1 Train (Red Line) — Hotel Station: Houston St</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">Walk 3 mins east from hotel to Varick & Houston St.</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=Houston+St+Subway+Station&travelmode=walking" target="_blank">🚶 Walk to Houston St Station</a>
+            </div>
+
+            <div class="subway-route">
+                <strong>Subway to Barnard & Columbia</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">Uptown 1 Train direct from Houston St to 116th St (~28 min).</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Houston+St+Subway+Station&destination=116+St+-+Columbia+University+Station&travelmode=transit" target="_blank">🚇 Houston St to 116th St (1 Train)</a>
+            </div>
+
+            <div class="subway-route">
+                <strong>Subway to Rockefeller Center / FAO Schwarz</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">Downtown 1 Train to 50th St or C Train to 50th St.</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=116+St+-+Columbia+University+Station&destination=FAO+Schwarz+30+Rockefeller+Plaza&travelmode=transit" target="_blank">🚇 Columbia to Rockefeller Center</a>
+            </div>
+
+            <div class="subway-route">
+                <strong>Subway & LIRR to Hofstra University</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">1 Train north to Penn Station → LIRR Hempstead Branch to Hempstead Station → Uber/N70 Bus.</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Four+Points+by+Sheraton+Manhattan+SoHo+Village&destination=Hofstra+University&travelmode=transit" target="_blank">🚆 Full Penn Station & LIRR Transit Map</a>
+            </div>
+
+            <div class="subway-route">
+                <strong>Subway to Palace Theatre (The Lost Boys)</strong>
+                <p style="font-size: 0.8rem; margin-top: 4px;">M1-M4 Bus down 5th Ave or C/1 Train to 50th St / Times Sq.</p>
+                <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Metropolitan+Museum+of+Art&destination=Palace+Theatre+160+W+47th+St&travelmode=transit" target="_blank">🚇 The Met to Palace Theatre</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- VAULT TAB -->
+    <div id="vault" class="tab-content">
+        <div class="card">
+            <div class="card-title" style="margin-bottom: 12px;">Confirmation Vault</div>
+            
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Four Points SoHo Hotel</div>
+                    <div class="vault-sub">Check-in Oct 10 • 2 Queens</div>
+                </div>
+                <div class="vault-code">#87049804</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">The Lost Boys Broadway</div>
+                    <div class="vault-sub">Sun Oct 11, 7:30 PM • 3 Tickets</div>
+                </div>
+                <div class="vault-code">#TGSRXK3</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Jellycat Diner FAO Schwarz</div>
+                    <div class="vault-sub">Mon Oct 12, 7:00 PM</div>
+                </div>
+                <div class="vault-code">#379448261</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Barnard College Tour</div>
+                    <div class="vault-sub">Mon Oct 12, 10:30 AM</div>
+                </div>
+                <div class="vault-code">Confirmed</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Columbia University Tour</div>
+                    <div class="vault-sub">Mon Oct 12, 3:00 PM</div>
+                </div>
+                <div class="vault-code">Confirmed</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">Hofstra University Tour</div>
+                    <div class="vault-sub">Tue Oct 13, 2:00 PM</div>
+                </div>
+                <div class="vault-code">Confirmed</div>
+            </div>
+
+            <div class="vault-item">
+                <div>
+                    <div class="vault-label">NYU Campus Tour</div>
+                    <div class="vault-sub">Wed Oct 14, 11:00 AM</div>
+                </div>
+                <div class="vault-code">Confirmed</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOHO SPOTS TAB -->
+    <div id="spots" class="tab-content">
+        <div class="card">
+            <div class="card-title">Nearby SoHo Highlights</div>
+            <div class="card-details" style="margin-top: 8px;">
+                <strong>Dominique Ansel Bakery</strong> (189 Spring St)<br>
+                Original Cronuts & DKA pastry.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Dominique+Ansel+Bakery+189+Spring+St" target="_blank">📍 Map Spot</a><br><br>
+
+                <strong>Prince Street Pizza</strong> (27 Prince St)<br>
+                Famous crispy square Sicilian pepperoni slices.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Prince+Street+Pizza+27+Prince+St" target="_blank">📍 Map Spot</a><br><br>
+
+                <strong>McNally Jackson Books</strong> (52 Prince St)<br>
+                Iconic independent bookstore & cafe.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=McNally+Jackson+Books+52+Prince+St" target="_blank">📍 Map Spot</a><br><br>
+
+                <strong>Glossier Flagship</strong> (126 Spring St)<br>
+                Interactive beauty showroom.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Glossier+SoHo+126+Spring+St" target="_blank">📍 Map Spot</a><br><br>
+
+                <strong>Vesuvio Bakery</strong> (160 Prince St)<br>
+                1920s Italian storefront bakery.<br>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Vesuvio+Bakery+160+Prince+St" target="_blank">📍 Map Spot</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function filterDay(dayClass) {
+            document.querySelectorAll('.day-btn').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (dayClass === 'all') {
+                document.querySelectorAll('.day-group').forEach(el => el.style.display = 'block');
+            } else {
+                document.querySelectorAll('.day-group').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.day-' + dayClass).forEach(el => el.style.display = 'block');
+            }
+        }
+    </script>
+</body>
+</html>
