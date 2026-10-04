@@ -291,6 +291,14 @@
             border-bottom: 0;
         }
 
+        .card > .day-group {
+            margin-bottom: 26px;
+        }
+
+        .card > .day-group:last-child {
+            margin-bottom: 0;
+        }
+
         .vault-label {
             color: var(--ink);
             font-size: 0.98rem;
