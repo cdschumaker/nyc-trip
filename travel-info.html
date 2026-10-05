@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Info | NYC College Tour &amp; Trip</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <nav class="site-nav" aria-label="Trip planning pages">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu">
+            <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <div class="nav-menu" id="site-menu">
+            <a href="index.html">Itinerary</a>
+            <a href="subway-maps.html">Subway Maps</a>
+            <a href="reservations.html">Reservations</a>
+            <a href="travel-info.html" class="active" aria-current="page">Travel Info</a>
+            <a href="soho-spots.html">SoHo Spots</a>
+            <a href="morningside-heights.html">Morningside Heights</a>
+            <a href="hofstra-hempstead.html">Hofstra / Hempstead</a>
+            <a href="upper-east-side-midtown.html">Upper East Side &amp; Midtown</a>
+        </div>
+    </nav>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="eyebrow">A New York getaway</div>
+            <h1>NYC Trip &amp; College Tour</h1>
+            <p>Oct 10 – Oct 14, 2026 • The Schumakers</p>
+        </div>
+    </header>
+
+    <main class="page-content active travel-info-page">
+        <section class="day-group" aria-labelledby="outbound-day">
+            <div class="day-heading">
+                <h2 id="outbound-day">Getting There</h2>
+                <p>Saturday · October 10</p>
+            </div>
+            <div class="day-activities">
+                <article class="card travel-info-card">
+                    <div class="card-header">
+                        <span class="tag tag-transit">Outbound Flight</span>
+                        <span class="time-badge">Arrive 2:17 PM</span>
+                    </div>
+                    <h3 class="card-title">American Airlines AA 4591</h3>
+                    <div class="card-location">📍 Northwest Arkansas National Airport (XNA) → LaGuardia Airport (LGA)</div>
+                    <div class="card-details">
+                        <p><strong>Date:</strong> Saturday, October 10, 2026.</p>
+                        <p><strong>Departure:</strong> XNA at 10:13 AM.</p>
+                        <p><strong>Arrival:</strong> LGA at 2:17 PM.</p>
+                        <p><strong>Operated by:</strong> Republic Airways as American Eagle.</p>
+                        <p><strong>Booking reference:</strong> In the American Airlines confirmation email; not shown on this public page.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="day-group" aria-labelledby="return-day">
+            <div class="day-heading">
+                <h2 id="return-day">Coming Home</h2>
+                <p>Wednesday · October 14</p>
+            </div>
+            <div class="day-activities">
+                <article class="card travel-info-card">
+                    <div class="card-header">
+                        <span class="tag tag-transit">Return Flight</span>
+                        <span class="time-badge">6:31 PM – 8:56 PM</span>
+                    </div>
+                    <h3 class="card-title">American Airlines AA 4554</h3>
+                    <div class="card-location">📍 LaGuardia Airport (LGA) → Northwest Arkansas National Airport (XNA)</div>
+                    <div class="card-details">
+                        <p><strong>Date:</strong> Wednesday, October 14, 2026</p>
+                        <p><strong>Departure:</strong> LGA at 6:31 PM.</p>
+                        <p><strong>Arrival:</strong> XNA at 8:56 PM.</p>
+                        <p><strong>Operated by:</strong> Republic Airways as American Eagle.</p>
+                        <p><strong>Booking reference:</strong> In the American Airlines confirmation email; not shown on this public page.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="day-group" aria-labelledby="hotel-heading">
+            <div class="day-heading">
+                <h2 id="hotel-heading">Where You’re Staying</h2>
+                <p>October 10–14</p>
+            </div>
+            <div class="day-activities">
+                <article class="card travel-info-card">
+                    <div class="card-header">
+                        <span class="tag tag-hotel">Hotel</span>
+                        <span class="time-badge">4 nights</span>
+                    </div>
+                    <h3 class="card-title">Four Points by Sheraton Manhattan SoHo Village</h3>
+                    <div class="card-location">📍 66 Charlton St, New York, NY 10014</div>
+                    <div class="card-details">
+                        <p><strong>Stay:</strong> Check-in Saturday, October 10; check-out Wednesday, October 14, 2026.</p>
+                        <p><strong>Room:</strong> 2 Queens.</p>
+                        <p><strong>Hotel confirmation:</strong> In your booking email; not shown on this public page.</p>
+                        <p><strong>Phone:</strong> <a href="tel:+12122299988">(212) 229-9988</a>.</p>
+                    </div>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Four+Points+by+Sheraton+Manhattan+SoHo+Village+66+Charlton+Street+New+York+NY+10014" target="_blank" rel="noopener">📍 Open Hotel in Google Maps</a>
+                </article>
+            </div>
+        </section>
+
+        <p class="card-details">Booking references are kept out of this public trip page; find them in the airline and hotel confirmation emails. Additional activity reservation details remain on the <a href="reservations.html">Reservations</a> page.</p>
+    </main>
+
+    <script>
+        document.querySelectorAll(".site-nav").forEach(nav => {
+            const toggle = nav.querySelector(".menu-toggle");
+
+            const closeMenu = (restoreFocus = false) => {
+                nav.classList.remove("is-open");
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.setAttribute("aria-label", "Open navigation");
+
+                if (restoreFocus) {
+                    toggle.focus();
+                }
+            };
+
+            toggle.addEventListener("click", () => {
+                const isOpen = toggle.getAttribute("aria-expanded") === "true";
+                nav.classList.toggle("is-open", !isOpen);
+                toggle.setAttribute("aria-expanded", String(!isOpen));
+                toggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+            });
+
+            nav.addEventListener("keydown", event => {
+                if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+                    event.preventDefault();
+                    closeMenu(true);
+                }
+            });
+
+            document.addEventListener("click", event => {
+                if (!nav.contains(event.target)) {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
