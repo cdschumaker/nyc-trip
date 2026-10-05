@@ -824,14 +824,16 @@
             font-size: 0.84rem;
         }
 
-        #spots .card-details {
+        #spots .card-details,
+        .spot-list {
             margin-top: 0 !important;
             padding: 0;
             font-size: 0.93rem;
             line-height: 1.6;
         }
 
-        #spots .card-details strong {
+        #spots .card-details strong,
+        .spot-list strong {
             display: inline-block;
             margin-top: 23px;
             padding-top: 18px;
@@ -841,13 +843,22 @@
             font-size: 1.2rem;
         }
 
-        #spots .card-details strong:first-child {
+        #spots .card-details strong:first-child,
+        .spot-list strong:first-child {
             margin-top: 0;
             padding-top: 0;
             border-top: 0;
         }
 
-        #spots .card-details small {
+        .spot-address {
+            display: inline-block;
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 0.88em;
+        }
+
+        #spots .card-details small,
+        .spot-list small {
             display: block;
             margin-top: 23px;
             padding-top: 13px;
@@ -856,7 +867,8 @@
             font-size: 0.86rem;
         }
 
-        #spots .map-btn {
+        #spots .map-btn,
+        .spot-list .map-btn {
             margin-top: 9px;
         }
 
