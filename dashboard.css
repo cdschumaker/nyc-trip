@@ -102,36 +102,34 @@
 
         .day-filter {
             display: flex;
-            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
             margin: 4px 0 26px;
-            padding: 0 0 3px;
-            overflow-x: auto;
-            scrollbar-width: thin;
+            padding: 0 0 16px;
+            border-bottom: 1px solid var(--line);
         }
 
-        .day-btn {
-            flex: 0 0 auto;
-            min-height: 42px;
-            padding: 8px 16px;
-            border: 1px solid #d9ddd5;
-            border-radius: 999px;
+        .day-filter label {
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .day-filter select {
+            min-width: 220px;
+            min-height: 44px;
+            padding: 8px 36px 8px 12px;
+            appearance: auto;
+            border: 1px solid var(--line);
+            border-radius: 2px;
             background: var(--surface);
-            color: var(--ink-soft);
+            color: var(--ink);
             cursor: pointer;
             font-size: 0.88rem;
-            font-weight: 650;
-            transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
-        }
-
-        .day-btn:hover:not(.active) {
-            border-color: var(--ink-soft);
-            background: #f0f0e9;
-        }
-
-        .day-btn.active {
-            border-color: var(--accent);
-            background: var(--accent);
-            color: white;
+            font-weight: 600;
         }
 
         .day-group[hidden] {
@@ -146,9 +144,7 @@
         }
 
         .day-heading {
-            display: flex;
-            align-items: baseline;
-            gap: 11px;
+            display: block;
             margin: 0 0 12px 2px;
             padding: 5px 0 0 15px;
             border-left: 2px solid var(--accent);
@@ -161,20 +157,13 @@
             font-weight: 500;
             letter-spacing: -0.025em;
             line-height: 1.2;
+            white-space: nowrap;
         }
 
         .day-heading p {
-            margin: 0;
+            margin: 4px 0 0;
             color: var(--muted);
             font-size: 0.85rem;
-        }
-
-        .travel-info-page .day-heading {
-            display: block;
-        }
-
-        .travel-info-page .day-heading h2 {
-            white-space: nowrap;
         }
 
         .day-activities {
@@ -590,37 +579,8 @@
             padding-top: 30px;
         }
 
-        .day-filter {
-            gap: 0;
+        #itinerary .day-filter {
             margin: 0 0 40px;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .day-btn {
-            min-height: 45px;
-            padding: 8px 17px;
-            border: 0;
-            border-radius: 999px;
-            background: transparent;
-            color: var(--muted);
-            font-size: 0.86rem;
-            font-weight: 700;
-        }
-
-        .day-btn:hover:not(.active) {
-            background: transparent;
-            color: var(--ink);
-        }
-
-        .day-btn.active {
-            position: relative;
-            border: 0;
-            background: var(--accent);
-            color: #fff;
-        }
-
-        .day-btn.active::after {
-            content: none;
         }
 
         .day-group {
@@ -663,22 +623,8 @@
         }
 
         #itinerary .card {
-            display: grid;
-            grid-template-columns: minmax(120px, 0.24fr) minmax(0, 1fr);
-            grid-template-rows: auto auto auto auto;
-            grid-template-areas:
-                "meta title"
-                "meta location"
-                "meta details"
-                "meta action";
-            column-gap: 30px;
+            display: block;
         }
-
-        #itinerary .card-header { grid-area: meta; }
-        #itinerary .card-title { grid-area: title; }
-        #itinerary .card-location { grid-area: location; }
-        #itinerary .card-details { grid-area: details; }
-        #itinerary .map-btn { grid-area: action; }
 
         .card:hover {
             transform: none;
@@ -796,8 +742,9 @@
         .subway-route strong {
             grid-column: 1;
             font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
-            font-size: 1.17rem;
+            font-size: 1.2rem;
             font-weight: 600;
+            letter-spacing: -0.02em;
         }
 
         .subway-route p {
@@ -820,8 +767,9 @@
 
         .vault-label {
             font-family: "NYU Perstare", "Helvetica Neue", Arial, sans-serif;
-            font-size: 1.12rem;
+            font-size: 1.2rem;
             font-weight: 600;
+            letter-spacing: -0.02em;
         }
 
         .vault-sub {
@@ -906,12 +854,13 @@
                 padding-top: 24px;
             }
 
-            .day-filter {
+            #itinerary .day-filter {
                 margin-bottom: 30px;
             }
 
-            .day-btn {
-                padding-inline: 13px;
+            .day-filter select {
+                width: 100%;
+                min-width: 0;
             }
 
             .day-group {
@@ -924,8 +873,6 @@
             }
 
             .card {
-                grid-template-columns: 86px minmax(0, 1fr);
-                column-gap: 16px;
                 padding: 20px 0;
             }
 
@@ -985,11 +932,6 @@
             nav,
             .page-content {
                 width: calc(100% - 28px);
-            }
-
-            .card {
-                grid-template-columns: 70px minmax(0, 1fr);
-                column-gap: 12px;
             }
 
             .time-badge {

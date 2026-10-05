@@ -33,13 +33,16 @@
     </header>
 
 <main id="itinerary" class="page-content active">
-        <div class="day-filter" role="group" aria-label="Filter itinerary by day">
-            <button class="day-btn active" aria-pressed="true" onclick="filterDay('all', this)">All Days</button>
-            <button class="day-btn" aria-pressed="false" onclick="filterDay('sat', this)">Sat 10</button>
-            <button class="day-btn" aria-pressed="false" onclick="filterDay('sun', this)">Sun 11</button>
-            <button class="day-btn" aria-pressed="false" onclick="filterDay('mon', this)">Mon 12</button>
-            <button class="day-btn" aria-pressed="false" onclick="filterDay('tue', this)">Tue 13</button>
-            <button class="day-btn" aria-pressed="false" onclick="filterDay('wed', this)">Wed 14</button>
+        <div class="day-filter">
+            <label for="day-select">View itinerary</label>
+            <select id="day-select" aria-label="Filter itinerary by day">
+                <option value="all">All Days</option>
+                <option value="sat">Saturday · October 10</option>
+                <option value="sun">Sunday · October 11</option>
+                <option value="mon">Monday · October 12</option>
+                <option value="tue">Tuesday · October 13</option>
+                <option value="wed">Wednesday · October 14</option>
+            </select>
         </div>
 
         <!-- SAT OCT 10 -->
@@ -260,17 +263,15 @@
             });
         });
 
-        function filterDay(dayClass, button) {
-            document.querySelectorAll('.day-btn').forEach(dayButton => {
-                const isActive = dayButton === button;
-                dayButton.classList.toggle('active', isActive);
-                dayButton.setAttribute('aria-pressed', String(isActive));
-            });
-
+        function filterDay(dayClass) {
             document.querySelectorAll('.day-group').forEach(day => {
                 day.hidden = dayClass !== 'all' && !day.classList.contains('day-' + dayClass);
             });
         }
+
+        document.querySelector('#day-select').addEventListener('change', event => {
+            filterDay(event.currentTarget.value);
+        });
     </script>
 </body>
 </html>
